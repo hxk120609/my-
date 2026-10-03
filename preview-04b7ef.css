@@ -1,0 +1,221 @@
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&family=ZCOOL+KuaiLe&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 240 10% 3.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 240 10% 3.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 10% 3.9%;
+    --primary: 240 5.9% 10%;
+    --primary-foreground: 0 0% 98%;
+    --secondary: 240 4.8% 95.9%;
+    --secondary-foreground: 240 5.9% 10%;
+    --muted: 240 4.8% 95.9%;
+    --muted-foreground: 240 3.8% 46.1%;
+    --accent: 240 4.8% 95.9%;
+    --accent-foreground: 240 5.9% 10%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 84.2% 60.2%;
+    --border: 240 5.9% 90%;
+    --input: 240 5.9% 90%;
+    --ring: 240 5.9% 10%;
+    --radius: 0.625rem;
+
+    /* ===== 薄荷小猫主题色板（源自封面图） ===== */
+    --mint: #5fe3c4;          /* 封面手写标题的薄荷绿 */
+    --mint-deep: #2fbf9d;
+    --mint-soft: #dcf8ee;
+    --peri: #b3c0fe;          /* 珍珠蓝紫 */
+    --peri-soft: #e6ebff;
+    --sky: #bfe9f5;
+    --pearl: #f4f6fa;
+    --chrome-1: #f7f9fc;
+    --chrome-2: #c9cfdb;
+    --chrome-3: #9aa3b5;
+    --ink: #1c1e26;
+    --grass: #86c26a;
+  }
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    background: #ffffff;
+    color: var(--ink);
+    font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Hiragino Sans GB',
+      'Microsoft YaHei', 'Noto Sans SC', sans-serif;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+  ::selection {
+    background: var(--mint);
+    color: #fff;
+  }
+}
+
+/* ===== 字体工具类 ===== */
+.font-hand {
+  font-family: 'Caveat', 'ZCOOL KuaiLe', cursive;
+}
+.font-cute {
+  font-family: 'ZCOOL KuaiLe', 'Caveat', sans-serif;
+}
+.font-lp {
+  font-family: 'Space Mono', 'PingFang SC', 'Microsoft YaHei', monospace;
+  letter-spacing: 0.22em;
+}
+
+/* ===== 铬银金属质感文字 ===== */
+.chrome-text {
+  background: linear-gradient(
+    175deg,
+    #fdfefe 0%,
+    #dfe4ec 22%,
+    #aab2c2 45%,
+    #f2f5f9 60%,
+    #8e97aa 78%,
+    #e8ecf3 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* ===== 黑胶唱片旋转 ===== */
+@keyframes vinyl-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+.vinyl-spin {
+  animation: vinyl-spin 9s linear infinite;
+  transform-origin: center;
+}
+
+/* ===== 环形文字慢转 ===== */
+@keyframes orbit-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(-360deg); }
+}
+.orbit-spin {
+  animation: orbit-spin 24s linear infinite;
+  transform-origin: center;
+}
+
+/* ===== 漂浮 ===== */
+@keyframes floaty {
+  0%, 100% { transform: translateY(0) rotate(-1.5deg); }
+  50% { transform: translateY(-16px) rotate(1.5deg); }
+}
+.floaty {
+  animation: floaty 6s ease-in-out infinite;
+}
+.floaty-slow {
+  animation: floaty 9s ease-in-out infinite;
+}
+
+/* ===== 背景渐变色块缓慢漂移 ===== */
+@keyframes blob-drift {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(30px, -24px) scale(1.08); }
+  66% { transform: translate(-20px, 18px) scale(0.94); }
+}
+.blob-drift {
+  animation: blob-drift 14s ease-in-out infinite;
+}
+
+/* ===== 跑马灯 ===== */
+@keyframes marquee-x {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.marquee-track {
+  animation: marquee-x 26s linear infinite;
+}
+.marquee-track:hover {
+  animation-play-state: paused;
+}
+
+/* ===== 滚动显现 ===== */
+.reveal {
+  opacity: 0;
+  transform: translateY(36px);
+  transition:
+    opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+  transition-delay: var(--reveal-delay, 0ms);
+  will-change: opacity, transform;
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ===== 贴纸卡 hover ===== */
+.sticker-card {
+  transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.5s ease;
+}
+.sticker-card:hover {
+  transform: rotate(0deg) translateY(-8px) scale(1.02) !important;
+  box-shadow: 0 24px 48px -16px rgba(47, 191, 157, 0.25);
+}
+
+/* ===== 自定义光标 ===== */
+.custom-cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 18px;
+  height: 18px;
+  border-radius: 999px;
+  background: #fff;
+  mix-blend-mode: difference;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  transition: width 0.25s ease, height 0.25s ease;
+}
+.custom-cursor.is-hover {
+  width: 52px;
+  height: 52px;
+}
+@media (hover: none), (pointer: coarse) {
+  .custom-cursor { display: none; }
+}
+
+/* ===== 细星星闪烁 ===== */
+@keyframes twinkle {
+  0%, 100% { opacity: 0.25; transform: scale(0.8); }
+  50% { opacity: 1; transform: scale(1.15); }
+}
+.twinkle {
+  animation: twinkle 3.2s ease-in-out infinite;
+}
+
+/* ===== 下划线涂鸦链接 ===== */
+.scribble-link {
+  background-image: linear-gradient(transparent 62%, var(--mint) 62%, var(--mint) 92%, transparent 92%);
+  background-repeat: no-repeat;
+  transition: background-size 0.35s ease;
+  background-size: 100% 100%;
+}
+.scribble-link:hover {
+  background-size: 100% 100%;
+  background-image: linear-gradient(transparent 30%, var(--mint) 30%, var(--mint) 95%, transparent 95%);
+}
+
+/* 柔和滚动条 */
+::-webkit-scrollbar { width: 10px; }
+::-webkit-scrollbar-track { background: #fff; }
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, var(--mint), var(--peri));
+  border-radius: 999px;
+  border: 2px solid #fff;
+}
